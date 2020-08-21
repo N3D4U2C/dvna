@@ -1,0 +1,18 @@
+version: 2.1
+orbs:
+  cxflow: checkmarx-ts/cxflow@1.0.4
+workflows:
+  version: 2
+  sast-scan:
+    jobs:
+      - cxflow/results:
+          project: "DVWANodeJS"
+          team: "\\CxServer\\SP\\Checkmarx\\Users"
+      - cxflow/scan:
+          team: "\\CxServer\\SP\\Checkmarx\\Users"
+          preset: "High and Medium"
+          report-file: "findings.json"
+          filters:
+            branches:
+              only:
+                - master
